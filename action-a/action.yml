@@ -1,0 +1,10 @@
+name: "BuildAction"
+description: "Runs build"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "mic"
+  color: "purple"
