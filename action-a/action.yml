@@ -3,7 +3,7 @@ description: "Runs build"
 
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "../Dockerfile"
 
 branding:
   icon: "mic"
