@@ -18,23 +18,23 @@ class Num:
         self.isSorted = True
         return self._has
 
-    def variance(data, dd=0):
-        size = len(data)
-        mean = sum(data) / size
-        return sum((x - mean) ** 2 for x in data) / (size - dd)
+    def variance(self, dd=0):
+        size = len(self.nums)
+        mean = sum(self.nums) / size
+        return sum((x - mean) ** 2 for x in self.nums) / (size - dd)
 
-    def div(self, data) -> float:
-        var = self.variance(data)
+    def div(self) -> float:
+        var = self.variance(self.nums)
         dev = math.sqrt(var)
         return dev
 
 
-    def mid(data) -> float:
-        n = len(data)
+    def mid(self) -> float:
+        n = len(self.nums)
         index = n // 2
         if n % 2:
-            return data[index]
-        return sum(data[index - 1:index + 1]) / 2
+            return self.nums[index]
+        return sum(self.nums[index - 1:index + 1]) / 2
 
     def add(self, v, pos) -> None:
         if v != "?":
