@@ -1,10 +1,10 @@
 from ast import arg
 import sys
 import typing
+from code import Help, oo, the
 from code import Sym
-from code import oo
-from code import Help
 from code import Num
+
 
 class EG:
     def __init__(self) -> None:
@@ -22,7 +22,10 @@ class EG:
 
     def num(self) -> bool:
         num = Num()
-        for x in range(1, 100):
+        global the
+        if the.get("nums") is None:
+            the["nums"] = 100
+        for x in range(1, 101):
             num.add(x)
         mid = num.mid()
         div = num.div()
@@ -30,14 +33,34 @@ class EG:
         print(div)
         return 50 <= mid <= 52 and 30.5 < div < 32
 
+    def bignum(self) -> bool:
+        num = Num()
+        global the
+        the["nums"] = 32
+        for x in range(1, 1001):
+            num.add(x)
+        oo(num.nums())
+        return 32 == len(num._has)
+
+
 if __name__ == "__main__":
-    the = Help(sys.argv)
+    Help(sys.argv)
     if "help" in the.keys():
         Help.print_opts()
         exit(0)
 
     eg = EG()
     if not eg.sym():
-        print("Test Case Failed")
+        print("Sym: TC Failed")
     else:
-        print("Test Case Passed")
+        print("Sym: TC Passed")
+
+    if not eg.num():
+        print("Num: TC Failed")
+    else:
+        print("Num: TC Passed")
+
+    if not eg.bignum():
+        print("bignum: TC Failed")
+    else:
+        print("bignum: TC Passed")
