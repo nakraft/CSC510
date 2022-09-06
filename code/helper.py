@@ -1,4 +1,7 @@
+from math import floor
 import typing
+
+the = {}
 
 
 class Help:
@@ -12,8 +15,8 @@ class Help:
         "-S --seperator": {"info": "feild seperator =,", "type": "str"},
     }
 
-    def __new__(self, argv: list) -> dict:
-        the = {}
+    def __init__(self, argv: list):
+        global the
         arg_itr = 0
         while arg_itr < len(argv):
             for key in Help.help_map:
@@ -24,7 +27,6 @@ class Help:
                             "--", "")] = Help.to_type(argv[arg_itr + 1], Help.help_map[key]["type"])
                         arg_itr += 1
             arg_itr += 1
-        return the
 
     @staticmethod
     def print_opts() -> str:
@@ -72,3 +74,8 @@ class o:
 def oo(t):
     print(o(t))
     return t
+
+
+def per(t: list, p=0.5):
+    p = floor((p * len(t)) + 0.5) - 1
+    return t[max(0, min(len(t), p))]
