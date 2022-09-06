@@ -4,6 +4,7 @@ import typing
 from code import Sym
 from code import oo
 from code import Help
+from code import Num
 
 class EG:
     def __init__(self) -> None:
@@ -19,6 +20,15 @@ class EG:
         oo({"mid": mode, "div": entropy})
         return mode == "a" and 1.37 <= entropy <= 1.38
 
+    def num(self) -> bool:
+        num = Num()
+        for x in range(1, 100):
+            num.add(x)
+        mid = num.mid()
+        div = num.div()
+        print(mid)
+        print(div)
+        return 50 <= mid <= 52 and 30.5 < div < 32
 
 if __name__ == "__main__":
     the = Help(sys.argv)
