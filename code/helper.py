@@ -1,4 +1,5 @@
 from math import floor
+from re import T
 import typing
 
 the = {}
@@ -70,12 +71,36 @@ class o:
         u.sort()
         return "{" + " ".join(u) + "}"
 
+    def oo(t):
+        print(o(t))
+        return t
 
-def oo(t):
-    print(o(t))
-    return t
 
+class lists: 
 
-def per(t: list, p=0.5):
-    p = floor((p * len(t)) + 0.5) - 1
-    return t[max(0, min(len(t), p))]
+    def csv(fname, fun, sep, src, s, t): 
+        print('do something')
+
+    def push(t, x):
+        t[1+ len(t)] = x
+        return x
+
+    # takes an array and makes a copy 
+    # returns the copy of the original array
+    def copy(t): 
+
+        if (hasattr(t, '__len__')) and (not isinstance(t, str)):
+            return t
+
+        u = []
+        for key, value in enumerate(t): 
+            u[key] = lists.copy(value)
+        
+        # set/get metatable is not needed for python implementation. 
+        # no underlying operators have changed in this case. 
+        return u
+            
+    def per(t: list, p=0.5):
+        p = floor((p * len(t)) + 0.5) - 1
+        return t[max(0, min(len(t), p))]
+
