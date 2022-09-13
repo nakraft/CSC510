@@ -24,7 +24,7 @@ python -m test.test # tested with python3.8
 or
 python -m code.lua -e ALL
 ```
-Check https://github.com/nakraft/CSC510/actions/runs/ for docker build and test status
+Check [actions/runs/](https://github.com/nakraft/CSC510/actions) for docker build and test status.
 
 Warning:
 There shouldn't be any other package named `code` in `env:PYTHONPATH`; conflicts with vs-code package
