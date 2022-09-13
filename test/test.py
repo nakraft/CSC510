@@ -57,6 +57,30 @@ class EG:
         csv("../data/auto93.csv", fun)
         return True
 
+    def data(self):
+        d = Data("../data/auto93.csv")
+        for _, col in enumerate(d.cols.y):
+            oo(col)
+        return True
+
+    def stats(self):
+        data = Data("./data/auto93.csv")
+        def div(col):
+            if not isinstance(col, Num) or not isinstance(col, Num):
+                return None
+            return col.div()
+
+    def mid(col):
+            if not isinstance(col, Num) or not isinstance(col, Num):
+                return None
+            return col.mid()
+
+        print("xmid\t" + o(data.stats(2, data.cols.x, mid)))
+        print("xdiv\t" + o(data.stats(3, data.cols.x, div)))
+        print("ymid\t" + o(data.stats(2, data.cols.y, mid)))
+        print("ydiv\t" + o(data.stats(3, data.cols.y, div)))
+        return True
+
 
 if __name__ == "__main__":
     Help(sys.argv)
