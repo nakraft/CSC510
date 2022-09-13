@@ -1,3 +1,4 @@
+A
 from ast import arg
 import enum
 import sys
@@ -14,7 +15,7 @@ class EG:
     def __init__(self) -> None:
         pass
 
-    def sym(self) -> bool:
+    def sym(self):
         sym = Sym()
         for x in ["a", "a", "a", "a", "b", "b", "c"]:
             sym.add(x)
@@ -22,9 +23,10 @@ class EG:
         entropy = sym.div()
         entropy = (1000 * entropy) / 1000
         oo({"mid": mode, "div": entropy})
-        return mode == "a" and 1.37 <= entropy <= 1.38
+        assert mode == "a"
+        assert 1.37 <= entropy <= 1.38
 
-    def num(self) -> bool:
+    def num(self):
         num = Num()
         global the
         if the.get("nums") is None:
@@ -35,16 +37,17 @@ class EG:
         div = num.div()
         print(mid)
         print(div)
-        return 50 <= mid <= 52 and 30.5 < div < 32
+        assert 50 <= mid <= 52
+        assert 30.5 < div < 32
 
-    def bignum(self) -> bool:
+    def bignum(self):
         num = Num()
         global the
         the["nums"] = 32
         for x in range(1, 1001):
             num.add(x)
         oo(num.nums())
-        return 32 == len(num._has)
+        assert 32 == len(num._has)
 
     def csv(self) -> bool:
         n = 0
@@ -70,7 +73,7 @@ class EG:
                 return None
             return col.div()
 
-    def mid(col):
+        def mid(col):
             if not isinstance(col, Num) or not isinstance(col, Num):
                 return None
             return col.mid()
