@@ -22,15 +22,12 @@ class Data:
             for _, row in enumerate(src): 
                 self.add(row)
 
-    def add(self, xs, row): 
-        
-        if self.cols is not None: 
-            self.cols = cols(xs)
-        else: 
-            row = lists.push(self.rows, row(xs))
-            for key, value in enumerate(self.cols.x, self.cols.y): 
-                for key_inner, value_inner in enumerate(value): 
-                    cols.add(row.cells[value_inner.at]) # TODO: what is the equivalent of col.at in python
-
-    def stats(self, places = 2, showCols = data.cols.x,  fun = 'mid', t, v): 
-        # implement stats function 
+    def add(self, xs): 
+        if self.cols is None: 
+            self.cols = Cols(xs)
+        else:
+            row = Row(xs)
+            self.rows.append(row)
+            for _, todo in enumerate([self.cols.x, self.cols.y]): 
+                for __, col in enumerate(todo): 
+                    col.add(row.cells[col.at - 1]) # TODO: what is the equivalent of col.at in python
