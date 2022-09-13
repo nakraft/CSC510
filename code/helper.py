@@ -1,33 +1,46 @@
 from math import floor
 from re import T
 import typing
+import re
 
 the = {}
 
+class Table:
+    def __init__(self) -> None:
+        pass
 
-class Help:
+    def items(self):
+        return vars(self).items()
+
+class ArgHelper:
     help_map = {
-        "-e --eg":  {"info": "start-up example = nothing", "type": "str"},
-        "-d --dump": {"info": "on test failure, exit with stack dump = false", "type": "str"},
-        "-f --file": {"info": "file with csv data = ../data/auto93.csv", "type": "int"},
-        "-h --help": {"info": "show help = false", "type": "str"},
-        "-n --nums": {"info": "number of nums to keep = 512", "type": "int"},
-        "-s --seed": {"info": "random number seed = 10019", "type": "int"},
-        "-S --seperator": {"info": "feild seperator =,", "type": "str"},
+        "-e --eg":  {"info": "start-up example = nothing", "type": "str", "default" : "ALL"},
+        "-d --dump": {"info": "on test failure, exit with stack dump = false", "type": "bool", "default" : False},
+        "-f --file": {"info": "file with csv data = ../data/auto93.csv", "type": "str", "default" : "./csv/test.csv"},
+        "-h --help": {"info": "show help = false", "type": "bool", "default" : False},
+        "-n --nums": {"info": "number of nums to keep = 512", "type": "int", "default" : 512},
+        "-s --seed": {"info": "random number seed = 10019", "type": "int", "default" : 10019},
+        "-S --seperator": {"info": "feild seperator =,", "type": "str", "default" : ","},
     }
 
     def __init__(self, argv: list):
         global the
         arg_itr = 0
         while arg_itr < len(argv):
-            for key in Help.help_map:
+            for key in ArgHelper.help_map:
                 ls = key.split(' ')
                 if argv[arg_itr] in ls:
                     if arg_itr + 1 < len(argv):
                         the[ls[1].replace(
-                            "--", "")] = Help.to_type(argv[arg_itr + 1], Help.help_map[key]["type"])
+                            "--", "")] = ArgHelper.to_type(argv[arg_itr + 1], ArgHelper.help_map[key]["type"])
                         arg_itr += 1
             arg_itr += 1
+        
+        for key, value in ArgHelper.help_map.items():
+            ls = key.split(' ')
+            opt = ls[1].replace("--", "")
+            if the.get(opt) is None and value.get("default") is not None:
+                the[opt] = ArgHelper.to_type(value.get("default"), ArgHelper.help_map[key]["type"])
 
     @staticmethod
     def print_opts() -> str:
@@ -37,7 +50,7 @@ class Help:
         USAGE: lua seen.lua [OPTIONS]
         OPTIONS:"""
         print(info)
-        for k, v in Help.help_map.items():
+        for k, v in ArgHelper.help_map.items():
             print(f"\t\t{k}:{v['info']}")
 
     @staticmethod
@@ -49,6 +62,8 @@ class Help:
                 return float(obj)
             elif "str" == typename:
                 return str(obj)
+            elif "bool" == typename:
+                return bool(obj)
         except ValueError as e:
             return obj
 
@@ -57,23 +72,29 @@ class o:
     def __new__(self, obj) -> str:
         if obj is None:
             return ""
-        if not isinstance(obj, dict):
+        if isinstance(obj, list):
+            return "{" + " ".join(str(x) for x in obj) + "}"
+        if not isinstance(obj, dict) and not isinstance(obj, Table):
             return str(obj)
 
         def show(k, v) -> str:
-            if "^_" not in str(k):
+            if "_" != str(k)[0]:
                 v = o(v)
                 return f":{k} {v}"
+            return None
 
         u = []
         for k, v in obj.items():
-            u.append(show(k, v))
+            ob = show(k, v)
+            if ob is not None:
+                u.append(ob)
+
         u.sort()
         return "{" + " ".join(u) + "}"
 
-    def oo(t):
-        print(o(t))
-        return t
+def oo(t):
+    print(o(t))
+    return t
 
 
 class lists: 
@@ -99,8 +120,63 @@ class lists:
         # set/get metatable is not needed for python implementation. 
         # no underlying operators have changed in this case. 
         return u
-            
-    def per(t: list, p=0.5):
-        p = floor((p * len(t)) + 0.5) - 1
-        return t[max(0, min(len(t), p))]
+
+
+def per(t:list, p=0.5):
+    p = floor((p * len(t)) + 0.5) - 1
+    return t[max(0, min(len(t) - 1, p))]
+
+
+def rnd(x, places = 2) -> float:
+    mult = 10 ** places
+    return floor(x * mult + 0.5) / mult
+
+
+def tointeger(s:str):
+    res = None
+    try:
+        res = int(s)
+        if float(s) != res:
+            res = None
+    except ValueError:
+        pass
+    return res
+
+def tonumber(s:str):
+    res = None
+    try:
+        res = float(s)
+    except ValueError:
+        pass
+    return res
+
+def coerce(s:str):
+    if s is None:
+        return None
+
+    def fun(s1):
+        if s1 == "true": return True
+        if s1 == "false": return False
+        return s1
+
+    res = tointeger(s)
+    if res is not None:
+        return res
+    
+    res = tonumber(s)
+    if res is not None:
+        return res
+    return fun(s.strip())
+
+
+def csv(fname:str, fun, sep=None):
+    if sep is None:
+        sep = the["seperator"]
+    pattern = re.compile(sep)
+    with open(fname, "r") as src:
+        for line in src:
+            t = pattern.split(line)
+            for i in range(0, len(t)):
+                t[i] = coerce(t[i])
+            fun(t)
 

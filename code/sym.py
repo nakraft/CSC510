@@ -1,8 +1,10 @@
 import typing
 import math
+from .helper import Table
 
-class Sym:
+class Sym(Table):
     def __init__(self, c=0, s="") -> None:
+        super().__init__()
         self.n = 0
         self.at = c
         self.name = s
