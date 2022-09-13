@@ -86,7 +86,7 @@ class EG:
 
     @utest
     def data(self):
-        d = Data("../data/auto93.csv")
+        d = Data("./data/auto93.csv")
         for _, col in enumerate(d.cols.y):
             oo(col)
 
@@ -108,7 +108,6 @@ class EG:
         print("ymid\t" + o(data.stats(2, data.cols.y, mid)))
         print("ydiv\t" + o(data.stats(3, data.cols.y, div)))
     
-    @utest
     def run_all(self):
         self.sym()
         self.num()
