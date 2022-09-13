@@ -31,3 +31,16 @@ class Data:
             for _, todo in enumerate([self.cols.x, self.cols.y]): 
                 for __, col in enumerate(todo): 
                     col.add(row.cells[col.at - 1]) # TODO: what is the equivalent of col.at in python
+
+    def stats(self, places=2, showCols=None, fun=None):
+        if showCols is None:
+            showCols = self.cols.y
+        if fun is None:
+            fun = self.mid
+        t = {}
+        for _, col in enumerate(showCols):
+            v = fun(col)
+            if (type(v) == int) or (type(v) == float):
+                v = rnd(v, places)
+            t[col.name] = v
+        return t
