@@ -14,3 +14,15 @@ python -m test.test # tested with python3.8
 ```
 Warning:
 There shouldn't be any other package named `code` in `env:PYTHONPATH`; conflicts with vs-code package
+
+## HW3
+To run :
+
+```
+cd /path/repo
+python -m test.test # tested with python3.8
+or
+python -m code.lua -e ALL
+```
+Warning:
+There shouldn't be any other package named `code` in `env:PYTHONPATH`; conflicts with vs-code package
