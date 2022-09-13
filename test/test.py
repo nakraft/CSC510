@@ -83,12 +83,16 @@ class EG:
 
 
 if __name__ == "__main__":
-    Help(sys.argv)
+
+
+    ArgHelper(sys.argv)
     if "help" in the.keys():
-        Help.print_opts()
+        ArgHelper.print_opts()
         exit(0)
 
+
     eg = EG()
+
     if not eg.sym():
         print("Sym: TC Failed")
     else:
@@ -103,3 +107,7 @@ if __name__ == "__main__":
         print("bignum: TC Failed")
     else:
         print("bignum: TC Passed")
+
+    eg.stats()
+    eg.data()
+
