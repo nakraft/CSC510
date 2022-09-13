@@ -17,7 +17,7 @@ class ArgHelper:
         "-e --eg":  {"info": "start-up example = nothing", "type": "str", "default" : "ALL"},
         "-d --dump": {"info": "on test failure, exit with stack dump = false", "type": "bool", "default" : False},
         "-f --file": {"info": "file with csv data = ../data/auto93.csv", "type": "str", "default" : "./csv/test.csv"},
-        "-h --help": {"info": "show help = false", "type": "bool", "default" : False},
+        "-h --help": {"info": "show help = false", "type": "None"},
         "-n --nums": {"info": "number of nums to keep = 512", "type": "int", "default" : 512},
         "-s --seed": {"info": "random number seed = 10019", "type": "int", "default" : 10019},
         "-S --seperator": {"info": "feild seperator =,", "type": "str", "default" : ","},
@@ -30,12 +30,15 @@ class ArgHelper:
             for key in ArgHelper.help_map:
                 ls = key.split(' ')
                 if argv[arg_itr] in ls:
-                    if arg_itr + 1 < len(argv):
-                        the[ls[1].replace(
-                            "--", "")] = ArgHelper.to_type(argv[arg_itr + 1], ArgHelper.help_map[key]["type"])
-                        arg_itr += 1
+                    if ArgHelper.help_map[key]["type"] != "None":
+                        if arg_itr + 1 < len(argv):
+                            the[ls[1].replace(
+                                "--", "")] = ArgHelper.to_type(argv[arg_itr + 1], ArgHelper.help_map[key]["type"])
+                            arg_itr += 1
+                    else:
+                        the[ls[1].replace("--", "")] = None
             arg_itr += 1
-        
+
         for key, value in ArgHelper.help_map.items():
             ls = key.split(' ')
             opt = ls[1].replace("--", "")
