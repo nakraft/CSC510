@@ -1,11 +1,12 @@
 import math
 import random
 import re
-from .helper import per, the
+from .helper import per, the, Table
 
-class Num:
+class Num(Table):
 
     def __init__(self, c=0, s="") -> None:
+        super().__init__()
         self.lo = float('inf')
         self.hi = float('-inf')
         self.n = 0
@@ -51,4 +52,4 @@ class Num:
                 self.isSorted = False
                 if not self._has or (len(self._has) <= pos):
                     self._has += [0] * (pos - len(self._has) + 1)
-                self._has[pos] = int(v)
+                self._has[pos] = float(v)
