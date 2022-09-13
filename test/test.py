@@ -1,9 +1,13 @@
 from ast import arg
+import enum
 import sys
 import typing
-from code import Help, oo, the
+from code import ArgHelper, oo, o, the, csv
 from code import Sym
 from code import Num
+from code import Cols
+from code import Row
+from code import Data
 
 
 class EG:
@@ -41,6 +45,17 @@ class EG:
             num.add(x)
         oo(num.nums())
         return 32 == len(num._has)
+
+    def csv(self) -> bool:
+        n = 0
+        def fun(row):
+            n = n + 1
+            if n > 10:
+                return
+            else:
+                oo(row)
+        csv("../data/auto93.csv", fun)
+        return True
 
 
 if __name__ == "__main__":
