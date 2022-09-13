@@ -1,20 +1,34 @@
-A
 from ast import arg
 import enum
 import sys
 import typing
+import functools
 from code import ArgHelper, oo, o, the, csv
 from code import Sym
 from code import Num
 from code import Cols
 from code import Row
 from code import Data
+from colorama import Fore
+from colorama import Style
+from util import TestError
+import functools
 
+def utest(func):
+     @functools.wraps(func)
+       def wrapper(*args, **kwargs):
+         try:
+           func(*args,**kwargs)
+           print(f"{Fore.GREEN}{func.__name__} PASSED{Style.RESET_ALL}")
+         except TestError as te:
+           print(f"{Fore.RED}{func.__name__} FAILED with ERROR: '{te.mess}' {Style.RESET_ALL}")
+       return wrapper
 
 class EG:
     def __init__(self) -> None:
         pass
 
+    @utest
     def sym(self):
         sym = Sym()
         for x in ["a", "a", "a", "a", "b", "b", "c"]:
@@ -26,6 +40,7 @@ class EG:
         assert mode == "a"
         assert 1.37 <= entropy <= 1.38
 
+    @utest
     def num(self):
         num = Num()
         global the
@@ -40,6 +55,7 @@ class EG:
         assert 50 <= mid <= 52
         assert 30.5 < div < 32
 
+    @utest
     def bignum(self):
         num = Num()
         global the
@@ -60,12 +76,13 @@ class EG:
         csv("../data/auto93.csv", fun)
         return True
 
+    @utest
     def data(self):
         d = Data("../data/auto93.csv")
         for _, col in enumerate(d.cols.y):
             oo(col)
-        return True
 
+    @utest
     def stats(self):
         data = Data("./data/auto93.csv")
         def div(col):
@@ -82,7 +99,6 @@ class EG:
         print("xdiv\t" + o(data.stats(3, data.cols.x, div)))
         print("ymid\t" + o(data.stats(2, data.cols.y, mid)))
         print("ydiv\t" + o(data.stats(3, data.cols.y, div)))
-        return True
 
 
 if __name__ == "__main__":
@@ -96,21 +112,13 @@ if __name__ == "__main__":
 
     eg = EG()
 
-    if not eg.sym():
-        print("Sym: TC Failed")
-    else:
-        print("Sym: TC Passed")
+    eg.sym():
 
-    if not eg.num():
-        print("Num: TC Failed")
-    else:
-        print("Num: TC Passed")
+    eg.num():
 
-    if not eg.bignum():
-        print("bignum: TC Failed")
-    else:
-        print("bignum: TC Passed")
+    eg.bignum():
 
     eg.stats()
+    
     eg.data()
 
