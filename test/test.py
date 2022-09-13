@@ -120,7 +120,7 @@ if __name__ == "__main__":
 
 
     ArgHelper(sys.argv)
-    if the["help"] == True:
+    if "help" in the.keys():
         ArgHelper.print_opts()
         exit(0)
 

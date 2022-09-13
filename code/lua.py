@@ -5,6 +5,10 @@ from test.test import *
 
 if __name__ == '__main__':
     ArgHelper(sys.argv)
+    if "help" in the.keys():
+        ArgHelper.print_opts()
+        exit(0)
+
     eg = EG()
     if the["eg"] == "ALL":
         eg.run_all()
