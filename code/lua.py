@@ -1,17 +1,22 @@
 import sys
+sys.path.append("..")
+from .helper import *
+from test.test import *
 
 if __name__ == '__main__':
-
-    if "-h" in sys.argv[1]: 
-        print("fill in info about help here")
-        exit() 
-
-    if "-e" in sys.argv: 
-        pos = sys.argv.indexOf("-e")
-        val = sys.argv[pos + 1]
-
-        # run all tests 
-        if val == "ALL": 
-            print('run tests')
-        elif val == "task": 
-            print("run these tasks")
+    ArgHelper(sys.argv)
+    eg = EG()
+    if the["eg"] == "ALL":
+        eg.run_all()
+    elif the["eg"] == "sym":
+        eg.sym()
+    elif the["eg"] == "data":
+        eg.data()
+    elif the["eg"] == "num":
+        eg.num()
+    elif the["eg"] == "bignum":
+        eg.bignum()
+    elif the["eg"] == "csv":
+        eg.csv()
+    elif the["eg"] == "stats":
+        eg.stats()
