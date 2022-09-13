@@ -1,7 +1,8 @@
 
-import row
-import cols
-from helper import lists 
+from .row import Row
+from .cols import Cols
+from .helper import lists
+from .helper import rnd, csv
 
 class Data:
 
@@ -10,13 +11,16 @@ class Data:
         self.rows = []
         self.src = src
 
+        def fun(row):
+            self.add(row)
+
         if isinstance(src, str): 
             # calls the csv function which reads in a line of data 
-            lists.csv(src, Data.add(row)) # TODO: how do you pass a function with a variable yet to be declared
+            csv(src, fun) # TODO: how do you pass a function with a variable yet to be declared
         else:
             # or put in a table directly from src 
-            for key, value in enumerate(src): 
-                Data.add(value)
+            for _, row in enumerate(src): 
+                self.add(row)
 
     def add(self, xs, row): 
         
