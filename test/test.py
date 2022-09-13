@@ -9,20 +9,28 @@ from code import Num
 from code import Cols
 from code import Row
 from code import Data
-from colorama import Fore
-from colorama import Style
-from util import TestError
 import functools
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    GREEN = '\033[92m'
+    WARNING = '\033[93m'
+    RED = '\033[91m'
+    RESET_ALL = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def utest(func):
-     @functools.wraps(func)
-       def wrapper(*args, **kwargs):
-         try:
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
            func(*args,**kwargs)
-           print(f"{Fore.GREEN}{func.__name__} PASSED{Style.RESET_ALL}")
-         except TestError as te:
-           print(f"{Fore.RED}{func.__name__} FAILED with ERROR: '{te.mess}' {Style.RESET_ALL}")
-       return wrapper
+           print(f"{bcolors.GREEN}{func.__name__} PASSED{bcolors.RESET_ALL}")
+        except Exception as te:
+           print(f"{bcolors.RED}{func.__name__} FAILED with ERROR: '{te}' {bcolors.RESET_ALL}")
+    return wrapper
 
 class EG:
     def __init__(self) -> None:
@@ -44,8 +52,6 @@ class EG:
     def num(self):
         num = Num()
         global the
-        if the.get("nums") is None:
-            the["nums"] = 100
         for x in range(1, 101):
             num.add(x)
         mid = num.mid()
@@ -59,10 +65,12 @@ class EG:
     def bignum(self):
         num = Num()
         global the
+        old_num = the["nums"]
         the["nums"] = 32
         for x in range(1, 1001):
             num.add(x)
         oo(num.nums())
+        the["nums"] = old_num
         assert 32 == len(num._has)
 
     def csv(self) -> bool:
@@ -99,26 +107,24 @@ class EG:
         print("xdiv\t" + o(data.stats(3, data.cols.x, div)))
         print("ymid\t" + o(data.stats(2, data.cols.y, mid)))
         print("ydiv\t" + o(data.stats(3, data.cols.y, div)))
+    
+    @utest
+    def run_all(self):
+        self.sym()
+        self.num()
+        self.bignum()
+        self.stats()
+        self.data()
 
 
 if __name__ == "__main__":
 
 
     ArgHelper(sys.argv)
-    if "help" in the.keys():
+    if the["help"] == True:
         ArgHelper.print_opts()
         exit(0)
 
-
     eg = EG()
-
-    eg.sym():
-
-    eg.num():
-
-    eg.bignum():
-
-    eg.stats()
-    
-    eg.data()
+    eg.run_all()
 
