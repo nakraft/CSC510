@@ -3,7 +3,7 @@ from .num import Num
 import re
 
 class Cols:
-
+    pattern = re.compile("^[A-Z]*")
     def __init__(self, names) -> None:
         self.names = names
         self.all = [] 
@@ -16,7 +16,10 @@ class Cols:
             # always returns Num
             # src code should use + instead of *,
             # local i, j = string.find(s, "^[A-Z]+") (lua)
-            col = Num(c + 1, s)
+            if self.pattern.match(s) is not None:
+                col = Num(c + 1, s)
+            else:
+                col = Sym(c + 1, s)
             self.all.append(col)
             if s[-1] != ":":
                 if re.search("[!+-]", s) is not None:

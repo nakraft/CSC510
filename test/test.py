@@ -107,12 +107,12 @@ class EG:
         data = Data("./data/auto93.csv")
 
         def div(col):
-            if not isinstance(col, Num) or not isinstance(col, Num):
+            if not isinstance(col, Num) and not isinstance(col, Sym):
                 return None
             return col.div()
 
         def mid(col):
-            if not isinstance(col, Num) or not isinstance(col, Num):
+            if not isinstance(col, Num) and not isinstance(col, Sym):
                 return None
             return col.mid()
 
