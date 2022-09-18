@@ -11,6 +11,10 @@ from code import Row
 from code import Data
 import functools
 
+total_tc = 0
+tc_passed = 0
+
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -22,15 +26,21 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+
 def utest(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
-           func(*args,**kwargs)
-           print(f"{bcolors.GREEN}{func.__name__} PASSED{bcolors.RESET_ALL}")
+            global total_tc, tc_passed
+            total_tc += 1
+            func(*args, **kwargs)
+            print(f"{bcolors.GREEN}{func.__name__} PASSED{bcolors.RESET_ALL}")
+            tc_passed += 1
         except Exception as te:
-           print(f"{bcolors.RED}{func.__name__} FAILED with ERROR: '{te}' {bcolors.RESET_ALL}")
+            print(
+                f"{bcolors.RED}{func.__name__} FAILED with ERROR: '{te}' {bcolors.RESET_ALL}")
     return wrapper
+
 
 class EG:
     def __init__(self) -> None:
@@ -73,16 +83,18 @@ class EG:
         the["nums"] = old_num
         assert 32 == len(num._has)
 
+    @utest
     def csv(self) -> bool:
         n = 0
+
         def fun(row):
+            nonlocal n
             n = n + 1
             if n > 10:
                 return
             else:
                 oo(row)
-        csv("../data/auto93.csv", fun)
-        return True
+        csv("./data/auto93.csv", fun)
 
     @utest
     def data(self):
@@ -93,6 +105,7 @@ class EG:
     @utest
     def stats(self):
         data = Data("./data/auto93.csv")
+
         def div(col):
             if not isinstance(col, Num) or not isinstance(col, Num):
                 return None
@@ -107,18 +120,17 @@ class EG:
         print("xdiv\t" + o(data.stats(3, data.cols.x, div)))
         print("ymid\t" + o(data.stats(2, data.cols.y, mid)))
         print("ydiv\t" + o(data.stats(3, data.cols.y, div)))
-    
+
     def run_all(self):
         self.sym()
         self.num()
+        self.csv()
         self.bignum()
         self.stats()
         self.data()
 
 
 if __name__ == "__main__":
-
-
     ArgHelper(sys.argv)
     if "help" in the.keys():
         ArgHelper.print_opts()
@@ -126,4 +138,5 @@ if __name__ == "__main__":
 
     eg = EG()
     eg.run_all()
+    sys.exit(total_tc - tc_passed)
 
