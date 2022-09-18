@@ -10,6 +10,7 @@ from code import Cols
 from code import Row
 from code import Data
 import functools
+import traceback
 
 total_tc = 0
 tc_passed = 0
@@ -31,7 +32,7 @@ def utest(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
-            global total_tc, tc_passed
+            global total_tc, tc_passed, the
             total_tc += 1
             func(*args, **kwargs)
             print(f"{bcolors.GREEN}{func.__name__} PASSED{bcolors.RESET_ALL}")
@@ -39,6 +40,9 @@ def utest(func):
         except Exception as te:
             print(
                 f"{bcolors.RED}{func.__name__} FAILED with ERROR: '{te}' {bcolors.RESET_ALL}")
+            if "dump" in the.keys():
+                print("stacktrace:")
+                print(traceback.format_exc())
     return wrapper
 
 
