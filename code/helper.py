@@ -15,7 +15,7 @@ class Table:
 class ArgHelper:
     help_map = {
         "-e --eg":  {"info": "start-up example = nothing", "type": "str", "default" : "ALL"},
-        "-d --dump": {"info": "on test failure, exit with stack dump = false", "type": "bool", "default" : False},
+        "-d --dump": {"info": "on test failure, exit with stack dump = false", "type": "None"},
         "-f --file": {"info": "file with csv data = ../data/auto93.csv", "type": "str", "default" : "./csv/test.csv"},
         "-h --help": {"info": "show help = false", "type": "None"},
         "-n --nums": {"info": "number of nums to keep = 512", "type": "int", "default" : 512},
@@ -42,7 +42,7 @@ class ArgHelper:
         for key, value in ArgHelper.help_map.items():
             ls = key.split(' ')
             opt = ls[1].replace("--", "")
-            if the.get(opt) is None and value.get("default") is not None:
+            if (the.get(opt) is None) and value.get("default") is not None:
                 the[opt] = ArgHelper.to_type(value.get("default"), ArgHelper.help_map[key]["type"])
 
     @staticmethod
