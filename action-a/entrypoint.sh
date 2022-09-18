@@ -2,10 +2,11 @@
 
 cd /home/test/
 python3 -m test.test
-if python3 -m test.test | grep -i "fail"; then
-    echo "Build Failed"
-    exit 1
+res=$?
+
+if [ $res -ne 0 ]; then
+    echo -e "Build Failed\nNum Test Cases failed = "$res
+    exit $res
 else
     echo "Build Passed"
 fi
-
