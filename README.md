@@ -1,5 +1,15 @@
-![Build event parameter](https://github.com/nakraft/CSC510/actions/workflows/main.yml/badge.svg?event=push) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7033333.svg)](https://doi.org/10.5281/zenodo.7033333)
+<h1 align="center"> 
+  
+  ![header]([data/Picture1.png])     
+  
+  ![Build event parameter](https://github.com/nakraft/CSC510/actions/workflows/main.yml/badge.svg?event=push) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7033333.svg)](https://doi.org/10.5281/zenodo.7033333)
 [![codecov](https://codecov.io/gh/J-Sumer/CSC510/branch/main/graph/badge.svg?token=A6TNAPKAQ3)](https://codecov.io/gh/J-Sumer/CSC510) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+</h1>
+
+
+
 ## CSC 510 - HW1
 
 * Initial folder structure and files for CSC 510 : HW1
