@@ -3,8 +3,8 @@ from setuptools import setup
 setup(
     name='csc510',
     version='1',
-    description='CSC510 project',
-    author='Natalie Kraft, Ashrita Ramaswamy, Parth Sarthi, Seungyoung Lee',
+    description='CSC510 homework',
+    author='Kanishk Harde, Natalie Kraft, Jyothi Sumer Goud Maduru, Ashrita Ramaswamy, Siddarth Royapally, Parth Sarthi',
     packages=['csc510'],
     long_description="""\
         Project for CSC 510.
