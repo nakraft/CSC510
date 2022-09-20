@@ -157,18 +157,17 @@ class EG:
         s_t = {k: v for k, v in sorted(t.items(), key=lambda item: item[1])}
         return s_t != {}
 
-
+    @utest
     def ALL(self):
-        self.sym()
-        self.num()
-        self.csv()
-        self.bignum()
-        self.stats()
-        self.data()
-        self.LS()
-        self.the()
         self.BAD()
         self.LIST()
+        self.LS()
+        self.bignum()
+        self.csv()
+        self.data()
+        self.num()
+        self.stats()
+        self.sym()
         return True
 
 if __name__ == "__main__":
