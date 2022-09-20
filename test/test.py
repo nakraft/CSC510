@@ -32,12 +32,14 @@ def utest(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
-            print("-----------------------------------")
+            if func.__name__ != "ALL":
+                print("-----------------------------------")
+
             global total_tc, tc_passed, the
             total_tc += 1
             result = func(*args, **kwargs)
             if(result):
-                print(f"{bcolors.GREEN}!!!!!! \t PASS \t {func.__name__} \t  true{bcolors.RESET_ALL}")
+                print(f"{bcolors.GREEN}!!!!!! \t PASS \t {func.__name__} \t true{bcolors.RESET_ALL}")
                 tc_passed += 1
             else:
                 print(f"{bcolors.RED}!!!!!! \t FAIL \t {func.__name__} \t true{bcolors.RESET_ALL}")
@@ -72,8 +74,7 @@ class EG:
             num.add(x)
         mid = num.mid()
         div = num.div()
-        print(mid)
-        print(div)
+        print(mid, "\t", div)
         return 50 <= mid <= 52 and 30.5 < div < 32
 
     @utest
@@ -131,7 +132,7 @@ class EG:
 
     @utest
     def LS(self):
-        print("python -m code.lua -e")
+        print("Examples python -m code.lua -e ...")
         opts = [ m for m in dir(EG) if not m.startswith('__')]
         for ele in opts:
             print('\t',ele)
@@ -168,6 +169,7 @@ class EG:
         self.num()
         self.stats()
         self.sym()
+        self.the()
         return True
 
 if __name__ == "__main__":
