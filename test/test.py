@@ -32,14 +32,17 @@ def utest(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
+            print("-----------------------------------")
             global total_tc, tc_passed, the
             total_tc += 1
-            func(*args, **kwargs)
-            print(f"{bcolors.GREEN}{func.__name__} PASSED{bcolors.RESET_ALL}")
-            tc_passed += 1
+            result = func(*args, **kwargs)
+            if(result):
+                print(f"{bcolors.GREEN}!!!!!! \t PASS \t {func.__name__} \t  true{bcolors.RESET_ALL}")
+                tc_passed += 1
+            else:
+                print(f"{bcolors.RED}!!!!!! \t FAIL \t {func.__name__} \t true{bcolors.RESET_ALL}")
         except Exception as te:
-            print(
-                f"{bcolors.RED}{func.__name__} FAILED with ERROR: '{te}' {bcolors.RESET_ALL}")
+            print(f"{bcolors.RED}!!!!!! \t CRASH \t {func.__name__} \t false{bcolors.RESET_ALL}")
             if "dump" in the.keys():
                 print("stacktrace:")
                 print(traceback.format_exc())
@@ -59,8 +62,7 @@ class EG:
         entropy = sym.div()
         entropy = (1000 * entropy) / 1000
         oo({"mid": mode, "div": entropy})
-        assert mode == "a"
-        assert 1.37 <= entropy <= 1.38
+        return mode == "a" and  1.37 <= entropy <= 1.38
 
     @utest
     def num(self):
@@ -72,8 +74,7 @@ class EG:
         div = num.div()
         print(mid)
         print(div)
-        assert 50 <= mid <= 52
-        assert 30.5 < div < 32
+        return 50 <= mid <= 52 and 30.5 < div < 32
 
     @utest
     def bignum(self):
@@ -85,7 +86,7 @@ class EG:
             num.add(x)
         oo(num.nums())
         the["nums"] = old_num
-        assert 32 == len(num._has)
+        return 32 == len(num._has)
 
     @utest
     def csv(self) -> bool:
@@ -99,12 +100,14 @@ class EG:
             else:
                 oo(row)
         csv("./data/auto93.csv", fun)
+        return True
 
     @utest
     def data(self):
         d = Data("./data/auto93.csv")
         for _, col in enumerate(d.cols.y):
             oo(col)
+        return True
 
     @utest
     def stats(self):
@@ -124,7 +127,7 @@ class EG:
         print("xdiv\t" + o(data.stats(3, data.cols.x, div)))
         print("ymid\t" + o(data.stats(2, data.cols.y, mid)))
         print("ydiv\t" + o(data.stats(3, data.cols.y, div)))
-
+        return True
 
     @utest
     def the(self):
@@ -158,7 +161,7 @@ class EG:
         self.the()
         self.BAD()
         self.LIST()
-
+        return True
 
 if __name__ == "__main__":
     ArgHelper(sys.argv)
@@ -167,6 +170,6 @@ if __name__ == "__main__":
         exit(0)
 
     eg = EG()
-    eg.run_all()
+    eg.ALL()
     sys.exit(total_tc - tc_passed)
 
