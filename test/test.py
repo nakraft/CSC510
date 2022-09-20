@@ -127,6 +127,11 @@ class EG:
 
 
     @utest
+    def the(self):
+        print(the)
+        return True
+
+    @utest
     def BAD(self):
         print(self.nofield())
 
@@ -142,13 +147,17 @@ class EG:
         return t != []
 
 
-    def run_all(self):
+    def ALL(self):
         self.sym()
         self.num()
         self.csv()
         self.bignum()
         self.stats()
         self.data()
+        self.LS()
+        self.the()
+        self.BAD()
+        self.LIST()
 
 
 if __name__ == "__main__":
