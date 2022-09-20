@@ -130,6 +130,14 @@ class EG:
         return True
 
     @utest
+    def LS(self):
+        print("python -m code.lua -e")
+        opts = [ m for m in dir(EG) if not m.startswith('__')]
+        for ele in opts:
+            print('\t',ele)
+        return True
+
+    @utest
     def the(self):
         print(the)
         return True
