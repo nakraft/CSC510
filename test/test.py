@@ -149,13 +149,13 @@ class EG:
 
     @utest
     def LIST(self):
-        t = []
+        t = {}
         opts = [ m for m in dir(EG) if not m.startswith('__')]
         for ele in opts:
-            t.append(ele)
-        t = []
-        #t.sort()
-        return t != []
+            if ele in t.keys():
+                t[ele] += 1
+        s_t = {k: v for k, v in sorted(t.items(), key=lambda item: item[1])}
+        return s_t != {}
 
 
     def ALL(self):
