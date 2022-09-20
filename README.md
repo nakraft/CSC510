@@ -14,9 +14,13 @@ Group 36s Lua conversion project aims to allow you maximum flexibility when read
 
 ## Capabilities 
 
+- Loads a csv into a tabular format
+- Summarizes data for initial EDA 
+- Performs calculations without dependencies on third-party libraries 
 
 ## Use 
 
+Setup and installation instructions can be found in the [user-friendly install guide](INSTALL.md)
 
 ## Homework Deliverables 
 ### HW1
