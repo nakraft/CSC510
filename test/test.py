@@ -144,12 +144,12 @@ class EG:
         return True
 
     @utest
-    def BAD(self): # pragma: no cover
+    def BAD(self):
         print(self.nofield())
 
 
     @utest
-    def LIST(self): # pragma: no cover
+    def LIST(self): 
         t = {}
         opts = [ m for m in dir(EG) if not m.startswith('__')]
         for ele in opts:
@@ -160,8 +160,8 @@ class EG:
 
     @utest
     def ALL(self):
-        self.BAD()
-        self.LIST()
+        self.BAD() # pragma: no cover
+        self.LIST() # pragma: no cover
         self.LS()
         self.bignum()
         self.csv()
