@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) [2022] [Kraft, Lee, Ramaswamy, Sarthi]
+Copyright (c) [2022] [Harde, Kraft, Maduru, Ramaswamy, Royapally, Sarthi]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
