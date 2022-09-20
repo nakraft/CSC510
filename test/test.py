@@ -125,6 +125,23 @@ class EG:
         print("ymid\t" + o(data.stats(2, data.cols.y, mid)))
         print("ydiv\t" + o(data.stats(3, data.cols.y, div)))
 
+
+    @utest
+    def BAD(self):
+        print(self.nofield())
+
+
+    @utest
+    def LIST(self):
+        t = []
+        opts = [ m for m in dir(EG) if not m.startswith('__')]
+        for ele in opts:
+            t.append(ele)
+        t = []
+        #t.sort()
+        return t != []
+
+
     def run_all(self):
         self.sym()
         self.num()
