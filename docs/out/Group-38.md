@@ -1,3 +1,4 @@
+Total Score: 71
 
 |Notes|Score|Links|
 |-----|---------|---------|
