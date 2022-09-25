@@ -1,4 +1,4 @@
-Total Score: 84
+Total Score: 86
 
 |Notes|Score|Links|
 |-----|---------|---------|
