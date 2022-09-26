@@ -1,9 +1,9 @@
-Total Score: 76
+Total Score: 58
 
 |Notes|Score|Links|
 |-----|---------|---------|
-|Video1| 3 | This is HW. N/A | 
-|Video2| 3 | This is HW. N/A | 
+|Video1| 0 | This is HW. N/A | 
+|Video2| 0 | This is HW. N/A | 
 |Workload is spread over the whole team (one team member is often Xtimes more productive than the others, but nevertheless, here is a track record that everyone is contributing a lot)| 1 | From GH Insights. Sakshamrzt and Ssign0713 are the only two consistently contributing. |
 |Number of commits| 3 | From GH commits. 10+ per person. |
 |Number of commits: by different people| 2 | From GH Insights. |
@@ -29,7 +29,7 @@ Total Score: 76
 |Test cases: a large proportion of the issues related to handling failing cases.| 0 | No issues opened. |
 |Evidence that the whole team is using the same tools: everyone can get to all tools and files| 2 | This is difficult to identify, but it seemed like people had access. |
 |Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)| 2 | 2 team members updated repo. This seems to be more because they were the main contributors and not because of lack of access.|
-|Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| 3 | N/A | 
+|Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| 0 | N/A | 
 |Evidence that the members of the team are working across multiple places in the code base| 2 | 
 |Short release cycles | 2 |  Evident from multiple commits |
 |Does the website and documentation provide a clear, high-level overview of the software? | 1 | No overview of software provided. |
@@ -46,9 +46,9 @@ Total Score: 76
 |If team has provided more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use the software? | 0 | None | 
 |Did the team provide a comprehensive guide to all the software’s commands, functions and options? | 1 | Minimal instructions in README.md |
 |Did the team provide troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages? | 0 | None 
-|If the software can be used as a library, package or service by other software, do the team provide comprehensive API documentation? | 3  | No documentation, but cannot be used in this way |  
-|Did the team store the documentation under revision control with your source code? | 3 | N/A |  
-|Did the team publish the release history e.g. release data, version numbers, key features of each release etc. on your web site or in the documentation? | 3 | N/A | 
+|If the software can be used as a library, package or service by other software, do the team provide comprehensive API documentation? | 0  | No documentation, but cannot be used in this way |  
+|Did the team store the documentation under revision control with your source code? | 0 | N/A |  
+|Did the team publish the release history e.g. release data, version numbers, key features of each release etc. on your web site or in the documentation? | 0 | N/A | 
 |Does the software describe how a user can get help with using the software? | 0 | No description for help |  
 |Does the website and documentation describe what support, if any, the team provide to users and developers? | 0 | No description for help |  
 |Does the project have an e-mail address or forum that is solely for supporting users? | 0 | No email address for help | 
