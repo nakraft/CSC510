@@ -6,6 +6,8 @@ import re
 the = {}
 
 class Table:
+    """Base Class for lua Table objects
+    """
     def __init__(self) -> None:
         pass
 
@@ -13,6 +15,12 @@ class Table:
         return vars(self).items()
 
 class ArgHelper:
+    """
+    Class to handle cmd line arguments. 
+    Also initializes the global 'the'.
+    Create obj of this class to initialize Arguments and set 'the' object
+    """
+    
     help_map = {
         "-e --eg":  {"info": "start-up example = nothing", "type": "str", "default" : "ALL"},
         "-d --dump": {"info": "on test failure, exit with stack dump = false", "type": "None"},
@@ -46,7 +54,9 @@ class ArgHelper:
                 the[opt] = ArgHelper.to_type(value.get("default"), ArgHelper.help_map[key]["type"])
 
     @staticmethod
-    def print_opts() -> str:
+    def print_opts() -> None:
+        """prints 'help' on passing '-h' or '--help' as cmd line arg
+        """
         info = """
         CSV : summarized csv file
         (c) 2022 Tim Menzies <timm@ieee.org> BSD-2 license
@@ -58,6 +68,10 @@ class ArgHelper:
 
     @staticmethod
     def to_type(obj, typename: str):
+        """helper function to convert cmd line arg to given type.
+        Returns:
+        obj of passed typename 
+        """
         try:
             if "int" == typename:
                 return int(obj)
@@ -72,6 +86,8 @@ class ArgHelper:
 
 
 class o:
+    """class to convert any object to string.
+    """
     def __new__(self, obj) -> str:
         if obj is None:
             return ""
@@ -96,12 +112,16 @@ class o:
         return "{" + " ".join(u) + "}"
 
 def oo(t):
+    """`o` is a telescopt and `oo` are some binoculars we use to exam stucts.
+        generates a string from a nested table.
+    """
     print(o(t))
     return t
 
 
 class lists: 
-
+    """lists class
+    """
     def csv(fname, fun, sep, src, s, t): 
         print('do something')
 
@@ -126,16 +146,26 @@ class lists:
 
 
 def per(t:list, p=0.5):
+    """Returns:
+     the `p`-th thing from the sorted list `t`.
+    """
     p = floor((p * len(t)) + 0.5) - 1
     return t[max(0, min(len(t) - 1, p))]
 
 
 def rnd(x, places = 2) -> float:
+    """converted from lua
+    """
     mult = 10 ** places
     return floor(x * mult + 0.5) / mult
 
 
 def tointeger(s:str):
+    """converts string to integer.
+    Returns:
+    None: if string is float/any other type.
+    int: if string has no decimal value
+    """
     res = None
     try:
         res = int(s)
@@ -146,6 +176,11 @@ def tointeger(s:str):
     return res
 
 def tonumber(s:str):
+    """converts string to number.
+    Returns:
+    None: if string is any other type.
+    float: if string is a float
+    """
     res = None
     try:
         res = float(s)
@@ -154,6 +189,8 @@ def tonumber(s:str):
     return res
 
 def coerce(s:str):
+    """taken from lua
+    """
     if s is None:
         return None
 
@@ -172,7 +209,10 @@ def coerce(s:str):
     return fun(s.strip())
 
 
-def csv(fname:str, fun, sep=None):
+def csv(fname:str, fun, sep=None) -> None:
+    """Reads the CSV file and calls `fun` on each row.
+    Row cells are divided in `the.seperator`
+    """
     if sep is None:
         sep = the["seperator"]
     pattern = re.compile(sep)

@@ -4,7 +4,8 @@ import re
 from .helper import per, the, Table
 
 class Num(Table):
-
+    """Keeps numbers in sorted order. 
+    """
     def __init__(self, c=0, s="") -> None:
         super().__init__()
         self.lo = float('inf')
@@ -19,25 +20,42 @@ class Num(Table):
         else:
             self.w = -1
 
-    def nums(self):
+    def nums(self) -> list:
+        """
+        Returns:
+        list of numbers in sorted order. 
+        """
         if self.isSorted != True:
             self._has.sort()
         self.isSorted = True
         return self._has
 
-    def variance(self, dd=0):
+    def variance(self, dd=0) -> float:
+        """depreceated
+        """
         size = len(self.nums)
         mean = sum(self.nums) / size
         return sum((x - mean) ** 2 for x in self.nums) / (size - dd)
 
-    def div(self):
+    def div(self) -> float:
+        """get Diversity.
+        Returns:
+        Standard deviation for Nums 
+        """
         a = self.nums()
         return (per(a, .9) - per(a, .1)) / 2.58
 
     def mid(self):
+        """Get Central tendancy
+        Returns:
+        median of nums in Nums class
+        """
         return per(self.nums(), 0.5)
 
     def add(self, v) -> None:
+        """Reservoir sampler. Keeps at most `the.nums` numbers.
+        (and if it runs out of room, deletes something old, at random).,
+        """
         if str(v) != "?":
             self.n = self.n + 1
             self.lo = min(v, self.lo)
