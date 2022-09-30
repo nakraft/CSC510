@@ -4,12 +4,12 @@ import os
 import sys
 import typing
 import functools
-from code import ArgHelper, oo, o, the, csv
-from code import Sym
-from code import Num
-from code import Cols
-from code import Row
-from code import Data
+from Code import ArgHelper, oo, o, the, csv
+from Code import Sym
+from Code import Num
+from Code import Cols
+from Code import Row
+from Code import Data
 import functools
 import traceback
 
@@ -137,7 +137,7 @@ class EG:
 
     @utest
     def LS(self):
-        print("Examples python -m code.lua -e ...")
+        print("Examples python -m Code.lua -e ...")
         opts = [ m for m in dir(EG) if not m.startswith('__')]
         for ele in opts:
             print('\t',ele)

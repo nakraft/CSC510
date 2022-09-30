@@ -30,19 +30,19 @@ You can run the software after installation with the following core commands:
 - From within the root of the repository, all test suites can be run with: 
 
 ```
-(lua_venv) $ python3 -m code.lua
+(lua_venv) $ python3 -m Code.lua
 ```
 
 - To run with custom parameters or a unique dataset, try inserting the arguments: 
 
 ```
-(lua_venv) $ python3 -h code.lua 
+(lua_venv) $ python3 -h Code.lua 
 ```
 
 - For more details, visit the help page from within the terminal: 
 
 ```
-(lua_venv) $ python3 -h code.lua 
+(lua_venv) $ python3 -h Code.lua 
 ```
 
 ## Advanced details
