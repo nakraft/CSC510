@@ -3,8 +3,14 @@ from .num import Num
 import re
 
 class Cols:
+    """
+    Class that stores the columns of the CSV file.
+    """
 
     def __init__(self, names) -> None:
+        """
+            Initializing Cols with the data.
+        """
         self.names = names
         self.all = [] 
         self.klass = None 

@@ -1,5 +1,8 @@
 
 class Row:
+    """
+    Class that stores the rows of the CSV file.
+    """
 
     def __init__(self, t) -> None:
 
