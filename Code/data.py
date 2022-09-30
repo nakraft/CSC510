@@ -5,7 +5,8 @@ from .helper import lists
 from .helper import rnd, csv
 
 class Data:
-
+    """Data is a holder of `rows` and their sumamries (in `cols`).
+    """
     def __init__(self, src) -> None:
         self.cols = None
         self.rows = []
@@ -22,7 +23,10 @@ class Data:
             for _, row in enumerate(src): 
                 self.add(row)
 
-    def add(self, xs): 
+    def add(self, xs) -> None:
+        """Add a `row` to `data`.
+        Calls `add()` to  updatie the `cols` with new values.
+        """ 
         if self.cols is None: 
             self.cols = Cols(xs)
         else:
@@ -32,7 +36,10 @@ class Data:
                 for __, col in enumerate(todo): 
                     col.add(row.cells[col.at - 1]) # TODO: what is the equivalent of col.at in python
 
-    def stats(self, places=2, showCols=None, fun=None):
+    def stats(self, places=2, showCols=None, fun=None) -> dict:
+        """For `showCols` (default=`data.cols.x`) in `data`, show `fun` (default=`mid`),
+        -- rounding numbers to `places` (default=2)
+        """
         if showCols is None:
             showCols = self.cols.y
         if fun is None:
